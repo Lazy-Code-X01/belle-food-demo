@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { X, Mail, Lock, User, Eye, EyeOff, Phone, Gift, ChevronDown } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
+import { useSearchParams } from 'next/navigation';
 
 // ── SVG brand icons ──────────────────────────────────────────
 const GoogleIcon = () => (
@@ -32,7 +33,10 @@ const WhatsAppIcon = () => (
 export default function AuthPage() {
   const { login } = useAuth();
   const router = useRouter();
-  const [mode, setMode] = useState<'signin' | 'signup'>('signup');
+  const searchParams = useSearchParams();
+  const [mode, setMode] = useState<'signin' | 'signup'>(
+    searchParams.get('mode') === 'signin' ? 'signin' : 'signup'
+  );
   const [showPassword, setShowPassword] = useState(false);
   const [marketing, setMarketing] = useState(false);
   const [firstName, setFirstName] = useState('');

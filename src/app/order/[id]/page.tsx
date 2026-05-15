@@ -85,7 +85,7 @@ export default function OrderTrackingPage({ params }: { params: { id: string } }
   if (!mounted) return null;
 
   if (!isLoggedIn) {
-    router.replace('/auth');
+    router.replace('/auth?mode=signin');
     return null;
   }
 

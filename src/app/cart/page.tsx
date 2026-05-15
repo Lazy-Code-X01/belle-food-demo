@@ -46,14 +46,14 @@ export default function CartPage() {
           </div>
         </div>
 
-        <div className="flex flex-col items-center justify-center flex-1 px-5 animate-in fade-in zoom-in-95 duration-500">
+        <div className="flex flex-col items-center justify-center flex-1 px-5 pt-8 pb-4 animate-in fade-in zoom-in-95 duration-500">
           {/* Icon illustration */}
-          <div className="relative mb-6">
+          <div className="relative mb-8">
             <div className="w-28 h-28 rounded-full bg-brand-surface border border-brand-border flex items-center justify-center">
               <ShoppingCart size={48} className="text-brand-border" strokeWidth={1.25} />
             </div>
-            <div className="absolute -bottom-1 -right-1 w-9 h-9 rounded-full bg-brand-red flex items-center justify-center shadow-lg">
-              <UtensilsCrossed size={16} className="text-white" />
+            <div className="absolute -bottom-2 -right-2 w-9 h-9 rounded-full bg-brand-red flex items-center justify-center shadow-lg ring-2 ring-brand-black">
+              <UtensilsCrossed size={15} className="text-white" />
             </div>
           </div>
 

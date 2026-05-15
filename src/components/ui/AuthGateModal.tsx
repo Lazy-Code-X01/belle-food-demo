@@ -1,81 +1,97 @@
 "use client";
 
-import React from 'react';
+import React, { useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import Link from 'next/link';
-import { X, ShoppingBag, LogIn, UserPlus } from 'lucide-react';
+import { X, ShoppingBag, LogIn, UserPlus, MapPin, Package, RefreshCw, Tag } from 'lucide-react';
 
 interface Props {
   onClose: () => void;
 }
 
+const perks = [
+  { icon: MapPin,    label: 'Save your delivery address' },
+  { icon: Package,   label: 'Track your order in real time' },
+  { icon: RefreshCw, label: 'Reorder with one tap' },
+  { icon: Tag,       label: 'Unlock exclusive deals' },
+];
+
 export const AuthGateModal = ({ onClose }: Props) => {
-  return (
-    <div className="fixed inset-0 z-[100] flex items-end md:items-center justify-center">
+  // Lock body scroll while open
+  useEffect(() => {
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => { document.body.style.overflow = prev; };
+  }, []);
+
+  return createPortal(
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center px-5">
       {/* Backdrop */}
-      <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={onClose} />
+      <div className="absolute inset-0 bg-black/75 backdrop-blur-sm" onClick={onClose} />
 
-      {/* Sheet */}
-      <div className="relative z-10 w-full md:max-w-md bg-brand-card border border-brand-border rounded-t-2xl md:rounded-lg shadow-2xl animate-[fadeIn_0.25s_ease-out]">
+      {/* Card */}
+      <div className="relative z-10 w-full max-w-[320px] bg-brand-card border border-brand-border rounded-2xl shadow-2xl animate-in zoom-in-95 fade-in duration-200">
 
-        {/* Drag pill (mobile) */}
-        <div className="flex justify-center pt-3 pb-1 md:hidden">
-          <div className="w-10 h-1 rounded-full bg-brand-border" />
-        </div>
-
-        {/* Close — desktop */}
-        <button onClick={onClose} className="absolute top-4 right-4 text-brand-muted hover:text-brand-white transition-colors hidden md:block">
-          <X size={18} />
+        {/* Close */}
+        <button
+          onClick={onClose}
+          className="absolute top-3 right-3 w-7 h-7 flex items-center justify-center rounded-full bg-brand-surface hover:bg-brand-border text-brand-muted hover:text-brand-white transition-colors"
+        >
+          <X size={13} />
         </button>
 
-        <div className="px-6 pt-4 pb-8 flex flex-col items-center text-center gap-4">
+        <div className="px-5 pt-6 pb-6 flex flex-col items-center text-center gap-4">
           {/* Icon */}
-          <div className="w-14 h-14 rounded-full bg-brand-red/10 border border-brand-red/20 flex items-center justify-center">
-            <ShoppingBag size={24} className="text-brand-red" />
+          <div className="w-12 h-12 rounded-full bg-brand-red/10 border border-brand-red/20 flex items-center justify-center">
+            <ShoppingBag size={20} className="text-brand-red" />
           </div>
 
           {/* Copy */}
-          <div>
-            <h2 className="font-display font-bold text-xl text-brand-white">You&apos;re almost there!</h2>
-            <p className="font-body text-sm text-brand-muted mt-2 leading-relaxed max-w-xs mx-auto">
-              Sign in to complete your order, track delivery in real time, and save your address for next time.
+          <div className="space-y-1">
+            <h2 className="font-display font-bold text-lg text-brand-white leading-snug">
+              You&apos;re almost there!
+            </h2>
+            <p className="font-body text-xs text-brand-muted leading-relaxed max-w-[230px] mx-auto">
+              Sign in to complete your order and unlock the full experience.
             </p>
           </div>
 
           {/* Perks */}
-          <div className="w-full flex flex-col gap-2 text-left bg-brand-surface rounded-sm p-4 border border-brand-border">
-            {[
-              '📍 Save your delivery address',
-              '📦 Track your order in real time',
-              '🔁 Reorder with one tap',
-              '🎁 Unlock exclusive deals',
-            ].map(perk => (
-              <p key={perk} className="font-body text-sm text-brand-muted">{perk}</p>
+          <div className="w-full flex flex-col gap-2 text-left bg-brand-surface rounded-xl p-3 border border-brand-border">
+            {perks.map(({ icon: Icon, label }) => (
+              <div key={label} className="flex items-center gap-2.5">
+                <div className="w-6 h-6 rounded-md bg-brand-black/60 border border-brand-border flex items-center justify-center flex-shrink-0">
+                  <Icon size={11} className="text-brand-red" />
+                </div>
+                <span className="font-body text-xs text-brand-muted">{label}</span>
+              </div>
             ))}
           </div>
 
           {/* CTAs */}
-          <div className="w-full flex flex-col gap-3 mt-1">
+          <div className="w-full flex flex-col gap-2">
             <Link
-              href="/auth"
-              className="w-full flex items-center justify-center gap-2 bg-brand-red hover:bg-brand-red-hover text-white font-body font-bold text-xs uppercase tracking-widest py-4 rounded-sm transition-colors"
+              href="/auth?mode=signin"
+              className="w-full flex items-center justify-center gap-2 bg-brand-red hover:bg-brand-red-hover text-white font-body font-bold text-xs uppercase tracking-widest py-3 rounded-lg transition-colors"
             >
-              <LogIn size={14} /> Sign In
+              <LogIn size={13} /> Sign In
             </Link>
             <Link
-              href="/auth"
-              className="w-full flex items-center justify-center gap-2 border border-brand-border hover:border-brand-red text-brand-white font-body font-bold text-xs uppercase tracking-widest py-4 rounded-sm transition-colors"
+              href="/auth?mode=signup"
+              className="w-full flex items-center justify-center gap-2 border border-brand-border hover:border-brand-red text-brand-white font-body font-bold text-xs uppercase tracking-widest py-3 rounded-lg transition-colors"
             >
-              <UserPlus size={14} /> Create Free Account
+              <UserPlus size={13} /> Create Free Account
             </Link>
             <button
               onClick={onClose}
-              className="font-body text-xs text-brand-muted hover:text-brand-white transition-colors"
+              className="font-body text-[11px] text-brand-muted hover:text-brand-white transition-colors pt-0.5"
             >
               Continue browsing
             </button>
           </div>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };

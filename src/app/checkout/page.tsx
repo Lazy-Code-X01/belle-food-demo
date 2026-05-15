@@ -64,7 +64,7 @@ export default function CheckoutPage() {
 
   // Redirect unauthenticated users
   if (!isLoggedIn) {
-    router.replace('/auth');
+    router.replace('/auth?mode=signin');
     return null;
   }
 
