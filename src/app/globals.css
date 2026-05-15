@@ -74,6 +74,24 @@ body {
     will-change: transform, opacity;
   }
 
+  /* Steam / cooking simulation */
+  @keyframes steam-l {
+    0%   { transform: translateY(0)      translateX(0)     scaleX(1);   opacity: 0;    }
+    10%  { opacity: 1; }
+    45%  { transform: translateY(-72px)  translateX(-15px) scaleX(2.0); opacity: 0.45; }
+    80%  { opacity: 0.08; }
+    100% { transform: translateY(-155px) translateX(7px)   scaleX(2.8); opacity: 0;    }
+  }
+  @keyframes steam-r {
+    0%   { transform: translateY(0)      translateX(0)     scaleX(1);   opacity: 0;    }
+    10%  { opacity: 1; }
+    45%  { transform: translateY(-72px)  translateX(15px)  scaleX(2.0); opacity: 0.45; }
+    80%  { opacity: 0.08; }
+    100% { transform: translateY(-155px) translateX(-7px)  scaleX(2.8); opacity: 0;    }
+  }
+  .steam-l { animation: steam-l ease-out infinite; will-change: transform, opacity; }
+  .steam-r { animation: steam-r ease-out infinite; will-change: transform, opacity; }
+
   @keyframes marquee {
     0%   { transform: translateX(0); }
     100% { transform: translateX(-50%); }

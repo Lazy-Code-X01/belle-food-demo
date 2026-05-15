@@ -202,36 +202,46 @@ export default function Home() {
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] rounded-full bg-brand-red opacity-[0.08] blur-[100px]" />
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] rounded-full bg-brand-red opacity-[0.06] blur-[60px]" />
         </div>
-        <div className="hidden md:block absolute inset-0 pointer-events-none z-0 overflow-hidden" aria-hidden="true">
+        {/* Steam / cooking simulation */}
+        <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden" aria-hidden="true">
+          {/* Ember warmth glow rising from the bottom */}
+          <div className="absolute bottom-0 left-0 right-0 h-56"
+            style={{ background: 'linear-gradient(to top, rgba(180,45,10,0.22), rgba(200,80,20,0.07), transparent)' }} />
+
           {[
-            { img: 'https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=80&h=80&fit=crop&auto=format&q=60', left: '5%',  delay: '0s',   dur: '9s',  size: 36 },
-            { img: 'https://images.unsplash.com/photo-1598103442097-8b74394b95c6?w=80&h=80&fit=crop&auto=format&q=60', left: '15%', delay: '1.5s', dur: '11s', size: 28 },
-            { img: 'https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=80&h=80&fit=crop&auto=format&q=60', left: '25%', delay: '3s',   dur: '8s',  size: 40 },
-            { img: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=80&h=80&fit=crop&auto=format&q=60', left: '38%', delay: '0.8s', dur: '13s', size: 32 },
-            { img: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=80&h=80&fit=crop&auto=format&q=60', left: '50%', delay: '2s',   dur: '10s', size: 34 },
-            { img: 'https://plus.unsplash.com/premium_photo-1677000666461-fbefa43c2c7f?w=80&h=80&fit=crop&auto=format&q=60', left: '62%', delay: '4s',   dur: '9s',  size: 28 },
-            { img: 'https://images.unsplash.com/photo-1563379926898-05f4575a45d8?w=80&h=80&fit=crop&auto=format&q=60', left: '72%', delay: '1s',   dur: '12s', size: 30 },
-            { img: 'https://plus.unsplash.com/premium_photo-1669831178095-005ed789250a?w=80&h=80&fit=crop&auto=format&q=60', left: '82%', delay: '3.5s', dur: '11s', size: 36 },
-            { img: 'https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?w=80&h=80&fit=crop&auto=format&q=60', left: '90%', delay: '0.5s', dur: '8s',  size: 30 },
-            { img: 'https://plus.unsplash.com/premium_photo-1665669263531-cdcbe18e7fe4?w=80&h=80&fit=crop&auto=format&q=60', left: '45%', delay: '5s',   dur: '14s', size: 26 },
-            { img: 'https://images.unsplash.com/photo-1512058564366-18510be2db19?w=80&h=80&fit=crop&auto=format&q=60', left: '8%',  delay: '6s',   dur: '10s', size: 28 },
-            { img: 'https://images.unsplash.com/photo-1544145945-f90425340c7e?w=80&h=80&fit=crop&auto=format&q=60', left: '58%', delay: '2.5s', dur: '9s',  size: 32 },
-          ].map((item, i) => (
+            // thin + fast (foreground detail)
+            { left: '6%',  delay: '0s',   dur: '3.8s', w: 5,  blur: 4,  h: 80,  warm: true,  dir: 'l' },
+            { left: '17%', delay: '1.9s', dur: '4.3s', w: 4,  blur: 3,  h: 70,  warm: false, dir: 'r' },
+            { left: '30%', delay: '0.6s', dur: '3.6s', w: 5,  blur: 4,  h: 75,  warm: true,  dir: 'r' },
+            { left: '46%', delay: '2.4s', dur: '4.0s', w: 4,  blur: 3,  h: 65,  warm: false, dir: 'l' },
+            { left: '61%', delay: '1.1s', dur: '3.9s', w: 5,  blur: 4,  h: 80,  warm: true,  dir: 'r' },
+            { left: '76%', delay: '3.3s', dur: '4.4s', w: 4,  blur: 3,  h: 70,  warm: false, dir: 'l' },
+            { left: '89%', delay: '0.4s', dur: '3.7s', w: 5,  blur: 4,  h: 75,  warm: true,  dir: 'r' },
+            // medium (mid-layer)
+            { left: '11%', delay: '0.9s', dur: '6.2s', w: 11, blur: 8,  h: 115, warm: true,  dir: 'r' },
+            { left: '35%', delay: '3.1s', dur: '7.0s', w: 12, blur: 9,  h: 125, warm: false, dir: 'l' },
+            { left: '54%', delay: '1.5s', dur: '6.6s', w: 10, blur: 8,  h: 108, warm: true,  dir: 'r' },
+            { left: '80%', delay: '2.7s', dur: '6.4s', w: 11, blur: 7,  h: 118, warm: false, dir: 'l' },
+            // wide + slow (background depth)
+            { left: '22%', delay: '0s',   dur: '9.5s', w: 22, blur: 17, h: 165, warm: false, dir: 'r' },
+            { left: '48%', delay: '5.0s', dur: '10s',  w: 26, blur: 20, h: 185, warm: true,  dir: 'l' },
+            { left: '70%', delay: '2.2s', dur: '8.8s', w: 20, blur: 15, h: 158, warm: false, dir: 'r' },
+          ].map((wisp, i) => (
             <div
               key={i}
-              className="food-float absolute bottom-0 rounded-full overflow-hidden border-2 border-white/10 shadow-lg"
+              className={`absolute bottom-0 rounded-full ${wisp.dir === 'l' ? 'steam-l' : 'steam-r'}`}
               style={{
-                left: item.left,
-                width: item.size,
-                height: item.size,
-                animationDelay: item.delay,
-                animationDuration: item.dur,
-                opacity: 0,
+                left: wisp.left,
+                width: wisp.w,
+                height: wisp.h,
+                background: wisp.warm
+                  ? 'linear-gradient(to top, rgba(255,105,25,0.55), rgba(255,168,55,0.18), transparent)'
+                  : 'linear-gradient(to top, rgba(210,215,228,0.32), rgba(255,255,255,0.08), transparent)',
+                filter: `blur(${wisp.blur}px)`,
+                animationDelay: wisp.delay,
+                animationDuration: wisp.dur,
               }}
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={item.img} alt="" className="w-full h-full object-cover" loading="lazy" />
-            </div>
+            />
           ))}
         </div>
 
