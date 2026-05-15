@@ -50,7 +50,7 @@ export const Sidebar = () => {
               <Icon size={17} strokeWidth={active ? 2.5 : 2} />
               <span className="font-body text-sm font-medium">{label}</span>
               {label === 'Menu' && cartCount > 0 && (
-                <span className="ml-auto w-5 h-5 bg-brand-red text-white text-[10px] font-bold rounded-full flex items-center justify-center">
+                <span className={`ml-auto w-5 h-5 text-[10px] font-bold rounded-full flex items-center justify-center ${active ? 'bg-white text-brand-red' : 'bg-brand-red text-white'}`}>
                   {cartCount}
                 </span>
               )}

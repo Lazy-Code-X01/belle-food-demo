@@ -22,9 +22,9 @@ export default function MenuPage() {
   useEffect(() => {
     setMounted(true);
     const categoryParam = searchParams.get('category');
-    if (categoryParam) {
-      setActiveCategory(categoryParam);
-    }
+    if (categoryParam) setActiveCategory(categoryParam);
+    const searchParam = searchParams.get('search');
+    if (searchParam) setSearchQuery(searchParam);
   }, [searchParams]);
 
   // Filter items

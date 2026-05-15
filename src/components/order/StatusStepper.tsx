@@ -45,7 +45,6 @@ export const StatusStepper: React.FC<StatusStepperProps> = ({ currentStatus }) =
         {STEPS.map((step, index) => {
           const isCompleted = index < currentIndex;
           const isActive = index === currentIndex;
-          const isPending = index > currentIndex;
           const isLast = index === STEPS.length - 1;
 
           return (

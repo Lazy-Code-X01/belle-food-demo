@@ -62,7 +62,7 @@ export default function Home() {
     return () => observer.disconnect();
   }, []);
 
-  const { isLoggedIn, user } = useAuth();
+  const { isLoggedIn } = useAuth();
 
   const featuredDishes = menuItems.filter(item =>
     ['jollof-rice', 'spaghetti-bolognese', 'seafood-pasta', 'asun', 'grilled-chicken', 'meat-pie', 'egusi-soup', 'chapman'].includes(item.id)

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { notFound, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { ChevronLeft, Heart, Check, Minus, Plus } from 'lucide-react';
 import { menuItems } from '@/data/menu';

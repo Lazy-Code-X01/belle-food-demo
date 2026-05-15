@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { X, Check, Phone, Share2, ChevronDown } from 'lucide-react';
 import { OrderStatus, StatusStepper } from '@/components/order/StatusStepper';
+import { CartItem } from '@/types';
 import { formatPrice } from '@/lib/utils';
 import { useToast } from '@/components/ui/Toast';
 import { useAuth } from '@/context/AuthContext';
@@ -16,7 +17,7 @@ export default function OrderTrackingPage({ params }: { params: { id: string } }
   const [mounted, setMounted] = useState(false);
   
   // Order State
-  const [order, setOrder] = useState<any>(null);
+  const [order, setOrder] = useState<Record<string, unknown> | null>(null);
   const [status, setStatus] = useState<OrderStatus>('received');
   
   // UI State
@@ -37,7 +38,7 @@ export default function OrderTrackingPage({ params }: { params: { id: string } }
         if (parsed.id === params.id) {
           setOrder(parsed);
         }
-      } catch (e) {
+      } catch {
         console.error("Failed to parse order");
       }
     }
@@ -73,7 +74,7 @@ export default function OrderTrackingPage({ params }: { params: { id: string } }
           text: text,
           url: window.location.href,
         });
-      } catch (err) {
+      } catch {
         console.log('Share dismissed');
       }
     } else {
@@ -95,7 +96,7 @@ export default function OrderTrackingPage({ params }: { params: { id: string } }
         <span className="text-5xl mb-4">🔍</span>
         <h2 className="font-display font-bold text-xl text-white">Order not found</h2>
         <p className="font-body text-sm text-brand-muted mt-2 text-center">
-          We couldn't find order #{params.id}
+          We couldn&apos;t find order #{params.id}
         </p>
         <Link 
           href="/"
@@ -212,17 +213,17 @@ export default function OrderTrackingPage({ params }: { params: { id: string } }
         
         <div className={`overflow-hidden transition-all duration-300 ease-in-out ${isDetailsExpanded ? 'max-h-[800px] opacity-100 mt-4' : 'max-h-0 opacity-0'}`}>
           <div className="flex flex-col pb-2">
-            {order.items.map((item: any, idx: number) => {
+            {(order.items as CartItem[]).map((item: CartItem, idx: number) => {
               // Calculate specific price for this item
               let basePrice = item.menuItem.price;
               if (item.size && item.menuItem.sizes) {
-                const sizePrice = item.menuItem.sizes.find((s: any) => s.name === item.size)?.price;
+                const sizePrice = item.menuItem.sizes.find(s => s.name === item.size)?.price;
                 if (sizePrice) basePrice = sizePrice;
               }
               let extrasPrice = 0;
               if (item.extras && item.menuItem.extras) {
                 item.extras.forEach((extraName: string) => {
-                  const ePrice = item.menuItem.extras?.find((e: any) => e.name === extraName)?.price;
+                  const ePrice = item.menuItem.extras?.find(e => e.name === extraName)?.price;
                   if (ePrice) extrasPrice += ePrice;
                 });
               }
@@ -242,16 +243,16 @@ export default function OrderTrackingPage({ params }: { params: { id: string } }
             
             {/* Find Delivery Fee from Total (hacky but reliable given our setup) */}
             {(() => {
-              const itemsTotal = order.items.reduce((sum: number, item: any) => {
+              const itemsTotal = (order.items as CartItem[]).reduce((sum: number, item: CartItem) => {
                 let basePrice = item.menuItem.price;
                 if (item.size && item.menuItem.sizes) {
-                  const sizePrice = item.menuItem.sizes.find((s: any) => s.name === item.size)?.price;
+                  const sizePrice = item.menuItem.sizes.find(s => s.name === item.size)?.price;
                   if (sizePrice) basePrice = sizePrice;
                 }
                 let extrasPrice = 0;
                 if (item.extras && item.menuItem.extras) {
                   item.extras.forEach((extraName: string) => {
-                    const ePrice = item.menuItem.extras?.find((e: any) => e.name === extraName)?.price;
+                    const ePrice = item.menuItem.extras?.find(e => e.name === extraName)?.price;
                     if (ePrice) extrasPrice += ePrice;
                   });
                 }

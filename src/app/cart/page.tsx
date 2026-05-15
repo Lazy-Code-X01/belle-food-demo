@@ -12,7 +12,7 @@ import { Input } from '@/components/ui/Input';
 import { AuthGateModal } from '@/components/ui/AuthGateModal';
 
 export default function CartPage() {
-  const { items, clearCart, cartCount } = useCart();
+  const { items, clearCart } = useCart();
   const { isLoggedIn } = useAuth();
   const router = useRouter();
   const [mounted, setMounted] = useState(false);

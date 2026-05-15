@@ -28,11 +28,6 @@ export const CartSummary: React.FC<CartSummaryProps> = ({ isPickup = false }) =>
           </span>
         </div>
         
-        <div className="flex justify-between items-center">
-          <span className="font-body text-sm text-brand-muted">Discount</span>
-          <span className="font-body text-sm text-brand-muted">-₦0</span>
-        </div>
-        
         <div className="h-px bg-brand-border my-2" />
         
         <div className="flex justify-between items-center">

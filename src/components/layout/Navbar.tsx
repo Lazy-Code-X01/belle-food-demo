@@ -30,10 +30,10 @@ export const Navbar = () => {
           <Link href="/menu" className="font-body text-xs font-medium text-brand-muted uppercase tracking-[0.08em] hover:text-brand-white transition-colors">
             Menu
           </Link>
-          <Link href="#" className="font-body text-xs font-medium text-brand-muted uppercase tracking-[0.08em] hover:text-brand-white transition-colors">
+          <Link href="/#about" className="font-body text-xs font-medium text-brand-muted uppercase tracking-[0.08em] hover:text-brand-white transition-colors">
             About
           </Link>
-          <Link href="#" className="font-body text-xs font-medium text-brand-muted uppercase tracking-[0.08em] hover:text-brand-white transition-colors">
+          <Link href="/order" className="font-body text-xs font-medium text-brand-muted uppercase tracking-[0.08em] hover:text-brand-white transition-colors">
             Track Order
           </Link>
         </nav>
