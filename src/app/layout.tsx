@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Playfair_Display, DM_Sans } from "next/font/google";
 import "./globals.css";
 import { CartProvider } from "@/context/CartContext";
@@ -19,10 +19,13 @@ const dmSans = DM_Sans({
   display: 'swap',
 });
 
+export const viewport: Viewport = {
+  themeColor: "#0A0A0A",
+};
+
 export const metadata: Metadata = {
   title: "Belle Food - Premium Food Delivery",
   description: "King Mitchy's Belle Food - Lagos's favourite restaurant, now online.",
-  themeColor: "#0A0A0A",
 };
 
 export default function RootLayout({

@@ -12,7 +12,7 @@ import { menuItems } from '@/data/menu';
 import { useCart } from '@/context/CartContext';
 import { formatPrice } from '@/lib/utils';
 
-export default function MenuPage() {
+function MenuPageInner() {
   const searchParams = useSearchParams();
   const [activeCategory, setActiveCategory] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState('');
@@ -112,4 +112,9 @@ export default function MenuPage() {
       )}
     </div>
   );
+}
+
+import { Suspense } from 'react';
+export default function MenuPage() {
+  return <Suspense><MenuPageInner /></Suspense>;
 }

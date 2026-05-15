@@ -30,7 +30,7 @@ const WhatsAppIcon = () => (
   </svg>
 );
 
-export default function AuthPage() {
+function AuthPageInner() {
   const { login } = useAuth();
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -308,4 +308,9 @@ export default function AuthPage() {
       </div>
     </div>
   );
+}
+
+import { Suspense } from 'react';
+export default function AuthPage() {
+  return <Suspense><AuthPageInner /></Suspense>;
 }

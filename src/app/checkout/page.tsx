@@ -8,7 +8,7 @@ import { useAuth } from '@/context/AuthContext';
 import { Input } from '@/components/ui/Input';
 import { formatPrice } from '@/lib/utils';
 
-export default function CheckoutPage() {
+function CheckoutPageInner() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const isPickup = searchParams.get('mode') === 'pickup';
@@ -323,4 +323,9 @@ export default function CheckoutPage() {
       </div>
     </div>
   );
+}
+
+import { Suspense } from 'react';
+export default function CheckoutPage() {
+  return <Suspense><CheckoutPageInner /></Suspense>;
 }
