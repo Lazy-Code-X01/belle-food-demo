@@ -3,6 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { ShoppingBag, Moon, Sun, User } from 'lucide-react';
+import Image from 'next/image';
 import { useCart } from '@/context/CartContext';
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
@@ -20,9 +21,9 @@ export const Navbar = () => {
     <header className="sticky top-0 z-50 bg-brand-black/95 backdrop-blur-md border-b border-brand-border">
       <div className="h-14 px-5 max-w-6xl mx-auto flex items-center justify-between">
         {/* Left: Logo */}
-        <Link href="/" className="flex items-center">
-          <span className="font-display font-bold text-xl text-brand-white">Belle</span>
-          <span className="font-display font-bold text-xl text-brand-red">Food</span>
+        <Link href="/" className="flex items-center gap-2">
+          <Image src="/logo.png" alt="Belle Food" width={48} height={48} className="object-contain" priority />
+          <span className="font-display font-bold text-xl text-brand-white">Belle<span className="text-brand-red">Food</span></span>
         </Link>
 
         {/* Middle: Desktop Nav Links */}

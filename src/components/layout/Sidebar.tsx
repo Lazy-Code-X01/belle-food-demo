@@ -42,9 +42,9 @@ export const Sidebar = () => {
 
       {/* Logo */}
       <div className="flex items-center h-16 px-6 border-b border-brand-border flex-shrink-0">
-        <Link href="/" className="flex items-center">
-          <span className="font-display font-bold text-xl text-brand-white">Belle</span>
-          <span className="font-display font-bold text-xl text-brand-red">Food</span>
+        <Link href="/" className="flex items-center gap-2">
+          <Image src="/logo.png" alt="Belle Food" width={44} height={44} className="object-contain" priority />
+          <span className="font-display font-bold text-xl text-brand-white">Belle<span className="text-brand-red">Food</span></span>
         </Link>
       </div>
 

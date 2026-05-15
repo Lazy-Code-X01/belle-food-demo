@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { MapPin, Clock, Phone, Mail } from 'lucide-react';
 
 export const Footer = () => {
@@ -11,9 +12,9 @@ export const Footer = () => {
 
         {/* Col 1: Brand */}
         <div className="col-span-2 md:col-span-1 flex flex-col gap-4">
-          <Link href="/" className="flex items-center">
-            <span className="font-display font-bold text-xl text-brand-white">Belle</span>
-            <span className="font-display font-bold text-xl text-brand-red">Food</span>
+          <Link href="/" className="flex items-center gap-2">
+            <Image src="/logo.png" alt="Belle Food" width={44} height={44} className="object-contain" />
+            <span className="font-display font-bold text-xl text-brand-white">Belle<span className="text-brand-red">Food</span></span>
           </Link>
           <p className="font-body text-sm text-brand-muted leading-relaxed max-w-[200px]">
             King Mitchy&apos;s Belle Food — Lagos&apos;s favourite restaurant, delivered fresh to your door.

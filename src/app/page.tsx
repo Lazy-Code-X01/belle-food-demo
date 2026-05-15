@@ -204,23 +204,34 @@ export default function Home() {
         </div>
         <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden" aria-hidden="true">
           {[
-            { emoji: '🍛', left: '5%',  delay: '0s',   dur: '9s',  size: '1.8rem' },
-            { emoji: '🍗', left: '15%', delay: '1.5s', dur: '11s', size: '1.4rem' },
-            { emoji: '🥘', left: '25%', delay: '3s',   dur: '8s',  size: '2rem'   },
-            { emoji: '🍝', left: '35%', delay: '0.8s', dur: '13s', size: '1.5rem' },
-            { emoji: '🥩', left: '50%', delay: '2s',   dur: '10s', size: '1.6rem' },
-            { emoji: '🍹', left: '62%', delay: '4s',   dur: '9s',  size: '1.4rem' },
-            { emoji: '🌶️', left: '72%', delay: '1s',   dur: '12s', size: '1.3rem' },
-            { emoji: '🍲', left: '82%', delay: '3.5s', dur: '11s', size: '1.8rem' },
-            { emoji: '🥗', left: '90%', delay: '0.5s', dur: '8s',  size: '1.5rem' },
-            { emoji: '🍖', left: '45%', delay: '5s',   dur: '14s', size: '1.2rem' },
-            { emoji: '🫙', left: '8%',  delay: '6s',   dur: '10s', size: '1.3rem' },
-            { emoji: '🧆', left: '58%', delay: '2.5s', dur: '9s',  size: '1.6rem' },
+            { img: 'https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=80&h=80&fit=crop&auto=format&q=60', left: '5%',  delay: '0s',   dur: '9s',  size: 36 },
+            { img: 'https://images.unsplash.com/photo-1598103442097-8b74394b95c6?w=80&h=80&fit=crop&auto=format&q=60', left: '15%', delay: '1.5s', dur: '11s', size: 28 },
+            { img: 'https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=80&h=80&fit=crop&auto=format&q=60', left: '25%', delay: '3s',   dur: '8s',  size: 40 },
+            { img: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=80&h=80&fit=crop&auto=format&q=60', left: '38%', delay: '0.8s', dur: '13s', size: 32 },
+            { img: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=80&h=80&fit=crop&auto=format&q=60', left: '50%', delay: '2s',   dur: '10s', size: 34 },
+            { img: 'https://plus.unsplash.com/premium_photo-1677000666461-fbefa43c2c7f?w=80&h=80&fit=crop&auto=format&q=60', left: '62%', delay: '4s',   dur: '9s',  size: 28 },
+            { img: 'https://images.unsplash.com/photo-1563379926898-05f4575a45d8?w=80&h=80&fit=crop&auto=format&q=60', left: '72%', delay: '1s',   dur: '12s', size: 30 },
+            { img: 'https://plus.unsplash.com/premium_photo-1669831178095-005ed789250a?w=80&h=80&fit=crop&auto=format&q=60', left: '82%', delay: '3.5s', dur: '11s', size: 36 },
+            { img: 'https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?w=80&h=80&fit=crop&auto=format&q=60', left: '90%', delay: '0.5s', dur: '8s',  size: 30 },
+            { img: 'https://plus.unsplash.com/premium_photo-1665669263531-cdcbe18e7fe4?w=80&h=80&fit=crop&auto=format&q=60', left: '45%', delay: '5s',   dur: '14s', size: 26 },
+            { img: 'https://images.unsplash.com/photo-1512058564366-18510be2db19?w=80&h=80&fit=crop&auto=format&q=60', left: '8%',  delay: '6s',   dur: '10s', size: 28 },
+            { img: 'https://images.unsplash.com/photo-1544145945-f90425340c7e?w=80&h=80&fit=crop&auto=format&q=60', left: '58%', delay: '2.5s', dur: '9s',  size: 32 },
           ].map((item, i) => (
-            <span key={i} className="food-float absolute bottom-0 select-none"
-              style={{ left: item.left, fontSize: item.size, animationDelay: item.delay, animationDuration: item.dur, opacity: 0 }}>
-              {item.emoji}
-            </span>
+            <div
+              key={i}
+              className="food-float absolute bottom-0 rounded-full overflow-hidden border-2 border-white/10 shadow-lg"
+              style={{
+                left: item.left,
+                width: item.size,
+                height: item.size,
+                animationDelay: item.delay,
+                animationDuration: item.dur,
+                opacity: 0,
+              }}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={item.img} alt="" className="w-full h-full object-cover" loading="lazy" />
+            </div>
           ))}
         </div>
 

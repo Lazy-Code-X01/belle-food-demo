@@ -84,9 +84,9 @@ export default function AuthPage() {
         </div>
 
         {/* Logo */}
-        <Link href="/" className="relative z-10 flex items-center">
-          <span className="font-display font-bold text-2xl text-white">Belle</span>
-          <span className="font-display font-bold text-2xl text-white/60">Food</span>
+        <Link href="/" className="relative z-10 flex items-center gap-2">
+          <Image src="/logo.png" alt="Belle Food" width={52} height={52} className="object-contain" />
+          <span className="font-display font-bold text-2xl text-white">Belle<span className="text-white/60">Food</span></span>
         </Link>
 
         {/* CEO image + copy */}
