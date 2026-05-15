@@ -1,9 +1,10 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
-import { Search } from 'lucide-react';
+import { Search, ShoppingBag } from 'lucide-react';
 import { Input } from '@/components/ui/Input';
 import { CategoryTabs } from '@/components/menu/CategoryTabs';
 import { FoodCard } from '@/components/menu/FoodCard';
@@ -84,23 +85,30 @@ export default function MenuPage() {
         </div>
       )}
 
-      {/* Sticky Bottom Cart Bar */}
-      {mounted && cartCount > 0 && (
-        <div className="fixed bottom-16 md:bottom-0 left-0 right-0 z-40 flex justify-center pointer-events-none">
-          <div className="max-w-6xl w-full pointer-events-auto">
-            <Link 
-              href="/cart"
-              className="bg-brand-red rounded-t-xl px-5 py-4 flex items-center justify-between transition-transform animate-in slide-in-from-bottom-full duration-300 shadow-2xl"
-            >
-              <span className="font-body font-bold text-[15px] text-white uppercase tracking-wider">
+      {/* Sticky Bottom Cart Bar — portalled to body to escape overflow:hidden ancestors */}
+      {mounted && cartCount > 0 && createPortal(
+        <div className="fixed bottom-16 md:bottom-6 left-0 right-0 z-[200] flex justify-center px-4 pointer-events-none">
+          <Link
+            href="/cart"
+            className="pointer-events-auto w-full max-w-sm md:max-w-xs bg-brand-red hover:bg-brand-red-hover rounded-full px-5 py-3.5 flex items-center justify-between shadow-2xl shadow-brand-red/30 animate-in slide-in-from-bottom-4 duration-300 transition-all active:scale-[0.97]"
+          >
+            <div className="flex items-center gap-2.5">
+              <div className="relative">
+                <ShoppingBag size={18} className="text-white" />
+                <span className="absolute -top-1.5 -right-1.5 w-4 h-4 bg-white text-brand-red text-[9px] font-black rounded-full flex items-center justify-center leading-none">
+                  {cartCount}
+                </span>
+              </div>
+              <span className="font-body font-bold text-[13px] text-white uppercase tracking-wider">
                 View Cart
               </span>
-              <span className="font-body font-semibold text-sm text-white/90">
-                {formatPrice(cartTotal)} · {cartCount} item{cartCount !== 1 && 's'}
-              </span>
-            </Link>
-          </div>
-        </div>
+            </div>
+            <span className="font-body font-semibold text-sm text-white/90">
+              {formatPrice(cartTotal)}
+            </span>
+          </Link>
+        </div>,
+        document.body
       )}
     </div>
   );

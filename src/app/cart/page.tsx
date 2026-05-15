@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { ChevronLeft, MapPin } from 'lucide-react';
+import { ChevronLeft, MapPin, ShoppingCart, UtensilsCrossed, ArrowRight } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import { useAuth } from '@/context/AuthContext';
 import { CartItemRow } from '@/components/cart/CartItemRow';
@@ -35,28 +35,62 @@ export default function CartPage() {
   if (items.length === 0) {
     return (
       <div className="flex flex-col flex-1 bg-brand-black pb-24">
+        {/* Header */}
         <div className="border-b border-brand-border sticky top-0 bg-brand-black/95 backdrop-blur-md z-40">
           <div className="max-w-6xl mx-auto w-full px-5 py-4 flex items-center justify-between">
             <Link href="/menu" className="p-1 -ml-1 text-white hover:text-brand-red transition-colors">
               <ChevronLeft size={20} />
             </Link>
             <h1 className="font-body font-semibold text-base text-white">Your Order</h1>
-            <div className="w-6" /> {/* Spacer */}
+            <div className="w-6" />
           </div>
         </div>
-        
+
         <div className="flex flex-col items-center justify-center flex-1 px-5 animate-in fade-in zoom-in-95 duration-500">
-          <span className="text-5xl mb-4">🛒</span>
-          <h2 className="font-display font-bold text-xl text-white">Your cart is empty</h2>
-          <p className="font-body text-sm text-brand-muted mt-2 text-center max-w-xs">
-            Browse our menu and add some delicious dishes
+          {/* Icon illustration */}
+          <div className="relative mb-6">
+            <div className="w-28 h-28 rounded-full bg-brand-surface border border-brand-border flex items-center justify-center">
+              <ShoppingCart size={48} className="text-brand-border" strokeWidth={1.25} />
+            </div>
+            <div className="absolute -bottom-1 -right-1 w-9 h-9 rounded-full bg-brand-red flex items-center justify-center shadow-lg">
+              <UtensilsCrossed size={16} className="text-white" />
+            </div>
+          </div>
+
+          <h2 className="font-display font-bold text-2xl text-white">Nothing here yet</h2>
+          <p className="font-body text-sm text-brand-muted mt-2 text-center max-w-[260px] leading-relaxed">
+            Your cart is empty. Head to the menu and pick something delicious.
           </p>
-          <Link 
+
+          <Link
             href="/menu"
-            className="mt-8 px-8 py-3.5 bg-brand-red hover:bg-brand-red-hover rounded-md font-body font-bold text-sm text-white uppercase tracking-wider transition-all active:scale-95"
+            className="mt-8 flex items-center gap-2 px-8 py-3.5 bg-brand-red hover:bg-brand-red-hover rounded-md font-body font-bold text-sm text-white uppercase tracking-wider transition-all active:scale-95"
           >
-            BROWSE MENU
+            Browse Menu <ArrowRight size={15} />
           </Link>
+
+          {/* Quick suggestion strip */}
+          <div className="mt-10 w-full max-w-sm">
+            <p className="font-body text-[11px] text-brand-muted uppercase tracking-widest mb-3 text-center">Popular right now</p>
+            <div className="flex flex-col gap-2">
+              {[
+                { name: 'Jollof Rice', price: '₦3,200', href: '/menu?category=rice' },
+                { name: 'Puff Puff', price: '₦1,500', href: '/menu?category=snacks' },
+                { name: 'Grilled Chicken', price: '₦4,500', href: '/menu?category=protein' },
+              ].map((s) => (
+                <Link
+                  key={s.name}
+                  href={s.href}
+                  className="flex items-center justify-between px-4 py-3 bg-brand-surface border border-brand-border rounded-md hover:border-brand-red/50 transition-colors group"
+                >
+                  <span className="font-body text-sm text-brand-white">{s.name}</span>
+                  <span className="flex items-center gap-1.5 font-body text-xs text-brand-muted group-hover:text-brand-red transition-colors">
+                    {s.price} <ArrowRight size={12} />
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     );
