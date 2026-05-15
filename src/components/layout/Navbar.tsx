@@ -21,9 +21,9 @@ export const Navbar = () => {
     <header className="sticky top-0 z-50 bg-brand-black/95 backdrop-blur-md border-b border-brand-border">
       <div className="h-14 px-5 max-w-6xl mx-auto flex items-center justify-between">
         {/* Left: Logo */}
-        <Link href="/" className="flex items-center gap-2">
-          <Image src="/logo.png" alt="Belle Food" width={48} height={48} className="object-contain" priority />
-          <span className="font-display font-bold text-xl text-brand-white">Belle<span className="text-brand-red">Food</span></span>
+        <Link href="/" className="flex items-center gap-0">
+          <Image src="/logo.png" alt="Belle Food" width={40} height={40} className="object-contain flex-shrink-0" priority />
+          <span className="font-display font-bold text-xl leading-none text-brand-white -ml-1 translate-y-[6px]">Belle<span className="text-brand-red">Food</span></span>
         </Link>
 
         {/* Middle: Desktop Nav Links */}

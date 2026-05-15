@@ -12,9 +12,9 @@ export const Footer = () => {
 
         {/* Col 1: Brand */}
         <div className="col-span-2 md:col-span-1 flex flex-col gap-4">
-          <Link href="/" className="flex items-center gap-2">
-            <Image src="/logo.png" alt="Belle Food" width={44} height={44} className="object-contain" />
-            <span className="font-display font-bold text-xl text-brand-white">Belle<span className="text-brand-red">Food</span></span>
+          <Link href="/" className="flex items-center gap-0">
+            <Image src="/logo.png" alt="Belle Food" width={38} height={38} className="object-contain flex-shrink-0" />
+            <span className="font-display font-bold text-xl leading-none text-brand-white -ml-1 translate-y-[6px]">Belle<span className="text-brand-red">Food</span></span>
           </Link>
           <p className="font-body text-sm text-brand-muted leading-relaxed max-w-[200px]">
             King Mitchy&apos;s Belle Food — Lagos&apos;s favourite restaurant, delivered fresh to your door.

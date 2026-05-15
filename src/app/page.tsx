@@ -202,7 +202,7 @@ export default function Home() {
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] rounded-full bg-brand-red opacity-[0.08] blur-[100px]" />
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] rounded-full bg-brand-red opacity-[0.06] blur-[60px]" />
         </div>
-        <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden" aria-hidden="true">
+        <div className="hidden md:block absolute inset-0 pointer-events-none z-0 overflow-hidden" aria-hidden="true">
           {[
             { img: 'https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=80&h=80&fit=crop&auto=format&q=60', left: '5%',  delay: '0s',   dur: '9s',  size: 36 },
             { img: 'https://images.unsplash.com/photo-1598103442097-8b74394b95c6?w=80&h=80&fit=crop&auto=format&q=60', left: '15%', delay: '1.5s', dur: '11s', size: 28 },

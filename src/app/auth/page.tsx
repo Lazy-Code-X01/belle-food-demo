@@ -84,9 +84,9 @@ function AuthPageInner() {
         </div>
 
         {/* Logo */}
-        <Link href="/" className="relative z-10 flex items-center gap-2">
-          <Image src="/logo.png" alt="Belle Food" width={52} height={52} className="object-contain" />
-          <span className="font-display font-bold text-2xl text-white">Belle<span className="text-white/60">Food</span></span>
+        <Link href="/" className="relative z-10 flex items-center gap-0">
+          <Image src="/logo.png" alt="Belle Food" width={44} height={44} className="object-contain flex-shrink-0" />
+          <span className="font-display font-bold text-2xl leading-none text-white -ml-1 translate-y-[6px]">Belle<span className="text-white/60">Food</span></span>
         </Link>
 
         {/* CEO image + copy */}
@@ -213,7 +213,7 @@ function AuthPageInner() {
                 <div className="flex flex-col gap-1.5">
                   <label className="font-body text-[11px] text-brand-muted uppercase tracking-widest">Phone Number <span className="text-brand-red">*</span></label>
                   <div className="flex items-stretch bg-brand-surface border border-brand-border rounded-sm overflow-hidden focus-within:border-brand-red transition-colors">
-                    <div className="flex items-center gap-1.5 px-3 border-r border-brand-border flex-shrink-0">
+                    <div className="flex items-center gap-0.5 px-3 border-r border-brand-border flex-shrink-0">
                       <span className="text-sm">🇳🇬</span>
                       <span className="font-body text-sm text-brand-muted">+234</span>
                       <ChevronDown size={12} className="text-brand-muted" />
