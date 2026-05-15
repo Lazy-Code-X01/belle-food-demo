@@ -10,14 +10,23 @@ import { formatPrice } from '@/lib/utils';
 import { useToast } from '@/components/ui/Toast';
 import { useAuth } from '@/context/AuthContext';
 
+interface StoredOrder {
+  id: string;
+  items: CartItem[];
+  total: number;
+  isPickup: boolean;
+  paymentMethod: 'cash' | 'card';
+  timestamp: string;
+}
+
 export default function OrderTrackingPage({ params }: { params: { id: string } }) {
   const router = useRouter();
   const { showToast } = useToast();
   const { isLoggedIn } = useAuth();
   const [mounted, setMounted] = useState(false);
-  
+
   // Order State
-  const [order, setOrder] = useState<Record<string, unknown> | null>(null);
+  const [order, setOrder] = useState<StoredOrder | null>(null);
   const [status, setStatus] = useState<OrderStatus>('received');
   
   // UI State
@@ -213,7 +222,7 @@ export default function OrderTrackingPage({ params }: { params: { id: string } }
         
         <div className={`overflow-hidden transition-all duration-300 ease-in-out ${isDetailsExpanded ? 'max-h-[800px] opacity-100 mt-4' : 'max-h-0 opacity-0'}`}>
           <div className="flex flex-col pb-2">
-            {(order.items as CartItem[]).map((item: CartItem, idx: number) => {
+            {order.items.map((item, idx) => {
               // Calculate specific price for this item
               let basePrice = item.menuItem.price;
               if (item.size && item.menuItem.sizes) {
@@ -243,7 +252,7 @@ export default function OrderTrackingPage({ params }: { params: { id: string } }
             
             {/* Find Delivery Fee from Total (hacky but reliable given our setup) */}
             {(() => {
-              const itemsTotal = (order.items as CartItem[]).reduce((sum: number, item: CartItem) => {
+              const itemsTotal = order.items.reduce((sum: number, item) => {
                 let basePrice = item.menuItem.price;
                 if (item.size && item.menuItem.sizes) {
                   const sizePrice = item.menuItem.sizes.find(s => s.name === item.size)?.price;

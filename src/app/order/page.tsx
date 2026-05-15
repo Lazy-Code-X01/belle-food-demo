@@ -7,11 +7,17 @@ import { Package, ArrowRight, Clock } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { formatPrice } from '@/lib/utils';
 
+interface StoredOrder {
+  id: string;
+  total: number;
+  isPickup: boolean;
+}
+
 export default function OrdersPage() {
   const { isLoggedIn } = useAuth();
   const router = useRouter();
   const [mounted, setMounted] = useState(false);
-  const [lastOrder, setLastOrder] = useState<Record<string, unknown> | null>(null);
+  const [lastOrder, setLastOrder] = useState<StoredOrder | null>(null);
 
   useEffect(() => {
     setMounted(true);
@@ -41,7 +47,7 @@ export default function OrdersPage() {
           <>
             <p className="font-body text-[11px] text-brand-muted uppercase tracking-widest">Recent</p>
             <Link
-              href={`/order/${lastOrder.id as string}`}
+              href={`/order/${lastOrder.id}`}
               className="flex items-center gap-4 p-4 bg-brand-surface border border-brand-border rounded-md hover:border-brand-red/50 transition-colors group"
             >
               <div className="w-10 h-10 rounded-full bg-brand-red/10 border border-brand-red/20 flex items-center justify-center flex-shrink-0">
@@ -49,12 +55,12 @@ export default function OrdersPage() {
               </div>
               <div className="flex-1 min-w-0">
                 <p className="font-body font-semibold text-sm text-brand-white">
-                  Order #{lastOrder.id as string}
+                  Order #{lastOrder.id}
                 </p>
                 <div className="flex items-center gap-1.5 mt-0.5">
                   <Clock size={11} className="text-brand-muted" />
                   <span className="font-body text-xs text-brand-muted">
-                    {formatPrice(lastOrder.total as number)} · {lastOrder.isPickup ? 'Pickup' : 'Delivery'}
+                    {formatPrice(lastOrder.total)} · {lastOrder.isPickup ? 'Pickup' : 'Delivery'}
                   </span>
                 </div>
               </div>
