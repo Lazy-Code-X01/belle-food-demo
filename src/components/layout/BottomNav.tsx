@@ -14,7 +14,7 @@ export const BottomNav = () => {
     { href: '/', label: 'Home', icon: Home },
     { href: '/menu', label: 'Menu', icon: UtensilsCrossed },
     { href: '/cart', label: 'Cart', icon: ShoppingBag, badge: cartCount },
-    { href: '/auth', label: 'Profile', icon: User },
+    { href: '/profile', label: 'Profile', icon: User },
   ];
 
   return (
