@@ -8,7 +8,7 @@ export const menuItems: MenuItem[] = [
     price: 3200,
     category: 'rice',
     image:
-      'https://images.unsplash.com/photo-1574484284002-952d92456975?w=600&h=400&fit=crop&auto=format&q=80',
+      'https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=600&h=400&fit=crop&auto=format&q=80',
     emoji: '🍛',
     tag: 'BEST SELLER',
     sizes: [
@@ -28,7 +28,7 @@ export const menuItems: MenuItem[] = [
     price: 3000,
     category: 'rice',
     image:
-      'https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=600&h=400&fit=crop&auto=format&q=80',
+      'https://images.unsplash.com/photo-1512058564366-18510be2db19?w=600&h=400&fit=crop&auto=format&q=80',
     emoji: '🍚',
   },
   {
@@ -38,7 +38,7 @@ export const menuItems: MenuItem[] = [
     price: 2800,
     category: 'rice',
     image:
-      'https://images.unsplash.com/photo-1596097635121-14b63a7efa8b?w=600&h=400&fit=crop&auto=format&q=80',
+      'https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?w=600&h=400&fit=crop&auto=format&q=80',
     emoji: '🫕',
   },
   {
