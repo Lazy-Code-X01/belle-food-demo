@@ -11,14 +11,14 @@ import { ImageSkeleton } from '@/components/ui/ImageSkeleton';
 import { useAuth } from '@/context/AuthContext';
 
 const categoryImages: Record<string, string> = {
-  rice:     'https://images.unsplash.com/photo-1574484284002-952d92456975?w=400&h=250&fit=crop&auto=format&q=80',
+  rice:     'https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=400&h=250&fit=crop&auto=format&q=80',
   pasta:    'https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=400&h=250&fit=crop&auto=format&q=80',
   proteins: 'https://images.unsplash.com/photo-1598103442097-8b74394b95c6?w=400&h=250&fit=crop&auto=format&q=80',
   drinks:   'https://plus.unsplash.com/premium_photo-1677000666461-fbefa43c2c7f?w=400&h=250&fit=crop&auto=format&q=80',
   soups:    'https://plus.unsplash.com/premium_photo-1669831178095-005ed789250a?w=400&h=250&fit=crop&auto=format&q=80',
   swallow:  'https://plus.unsplash.com/premium_photo-1696835870634-e6484e8ed4d7?w=400&h=250&fit=crop&auto=format&q=80',
   snacks:   'https://plus.unsplash.com/premium_photo-1665669263531-cdcbe18e7fe4?w=400&h=250&fit=crop&auto=format&q=80',
-  combos:   'https://images.unsplash.com/photo-1544025162-811114cd3543?w=400&h=250&fit=crop&auto=format&q=80',
+  combos:   'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400&h=250&fit=crop&auto=format&q=80',
 };
 
 const pad = (n: number) => String(n).padStart(2, '0');
@@ -278,21 +278,57 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── Quote Break ───────────────────────────────────────── */}
-      <section className="relative w-full py-16 md:py-20 px-5 bg-brand-red overflow-hidden flex items-center justify-center text-center">
-        {/* Subtle texture blobs */}
-        <div className="absolute -top-10 -left-10 w-64 h-64 rounded-full bg-white/5 blur-3xl pointer-events-none" />
-        <div className="absolute -bottom-10 -right-10 w-64 h-64 rounded-full bg-black/20 blur-3xl pointer-events-none" />
+      {/* ── Quote Break — Skewed / Creative ───────────────────── */}
+      <div className="relative overflow-hidden" style={{ zIndex: 1 }}>
+        {/* Skewed red band — creates parallelogram top + bottom edges */}
+        <div
+          className="bg-brand-red relative px-5 py-28 md:py-36"
+          style={{ transform: 'skewY(-3deg)', margin: '-2px 0' }}
+        >
+          {/* Counter-rotate so content stays upright */}
+          <div className="relative" style={{ transform: 'skewY(3deg)' }}>
 
-        <div className="relative z-10 max-w-3xl mx-auto">
-          <span className="font-display text-[80px] md:text-[120px] leading-none text-white/10 select-none absolute -top-6 left-0">&ldquo;</span>
-          <p className="font-display font-bold italic text-[28px] md:text-[42px] leading-tight text-white relative z-10">
-            Order from Belle Food<br />
-            <span className="text-white/80">make your skin full.</span>
-          </p>
-          <span className="font-display text-[80px] md:text-[120px] leading-none text-white/10 select-none absolute -bottom-10 right-0">&rdquo;</span>
+            {/* Giant ghost "FULL" watermark */}
+            <span
+              aria-hidden
+              className="pointer-events-none select-none absolute inset-0 flex items-center justify-center font-display font-black uppercase leading-none text-white/[0.04]"
+              style={{ fontSize: 'clamp(120px, 22vw, 240px)', letterSpacing: '-0.04em' }}
+            >
+              FULL
+            </span>
+
+            {/* Scattered star accents */}
+            <span aria-hidden className="absolute top-2 left-[8%]  text-white/20 text-2xl select-none">✦</span>
+            <span aria-hidden className="absolute top-0 right-[12%] text-white/15 text-xl  select-none">✦</span>
+            <span aria-hidden className="absolute bottom-1 right-[6%]  text-white/20 text-3xl select-none">✦</span>
+            <span aria-hidden className="absolute bottom-3 left-[38%] text-white/10 text-2xl select-none">✦</span>
+
+            {/* Quote content */}
+            <div className="relative z-10 max-w-5xl mx-auto flex flex-col items-center text-center gap-5">
+
+              {/* Line 1 — solid uppercase */}
+              <p className="font-display font-black uppercase leading-[0.95] text-white tracking-tight"
+                style={{ fontSize: 'clamp(32px, 6vw, 68px)' }}>
+                Order from Belle Food
+              </p>
+
+              {/* Ornamental divider */}
+              <div className="flex items-center gap-4 w-full max-w-[280px]">
+                <div className="flex-1 h-px bg-white/25" />
+                <span className="text-white/50 text-base leading-none">✦</span>
+                <div className="flex-1 h-px bg-white/25" />
+              </div>
+
+              {/* Line 2 — italic, slightly softer */}
+              <p className="font-display font-bold italic leading-[0.95] text-white/85"
+                style={{ fontSize: 'clamp(34px, 6.5vw, 72px)' }}>
+                make your skin full.
+              </p>
+
+            </div>
+          </div>
         </div>
-      </section>
+      </div>
 
       {/* ── Deal of the Day ────────────────────────────────────── */}
       <section className="px-5 py-10 w-full bg-brand-surface">
@@ -303,7 +339,7 @@ export default function Home() {
             <div className="relative min-h-[220px] md:min-h-full overflow-hidden">
               <ImageSkeleton />
               <Image
-                src="https://images.unsplash.com/photo-1574484284002-952d92456975?w=800&h=600&fit=crop&auto=format&q=80"
+                src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=800&h=600&fit=crop&auto=format&q=80"
                 alt="Deal of the Day"
                 fill className="object-cover"
                 sizes="(max-width: 768px) 100vw, 50vw"
@@ -482,7 +518,7 @@ export default function Home() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {[
-              { platform: 'tiktok' as const,    url: 'https://www.tiktok.com',    handle: '@bellefood_customer', caption: 'This jollof rice hits different 🔥',         thumbnail: 'https://images.unsplash.com/photo-1574484284002-952d92456975?w=400&h=700&fit=crop&auto=format&q=80' },
+              { platform: 'tiktok' as const,    url: 'https://www.tiktok.com',    handle: '@bellefood_customer', caption: 'This jollof rice hits different 🔥',         thumbnail: 'https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=400&h=700&fit=crop&auto=format&q=80' },
               { platform: 'instagram' as const, url: 'https://www.instagram.com', handle: '@emeka_eats',          caption: 'Belle Food never disappoints 🙌',            thumbnail: 'https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=400&h=700&fit=crop&auto=format&q=80' },
               { platform: 'tiktok' as const,    url: 'https://www.tiktok.com',    handle: '@funmiajah',           caption: 'The egusi soup brought me to tears 😭❤️',    thumbnail: 'https://images.unsplash.com/photo-1604329760661-e71dc83f8f26?w=400&h=700&fit=crop&auto=format&q=80' },
             ].map(({ platform, url, handle, caption, thumbnail }, idx) => (

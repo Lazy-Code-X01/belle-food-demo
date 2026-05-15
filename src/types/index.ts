@@ -3,7 +3,7 @@ export interface MenuItem {
   name: string;
   description: string;
   price: number;
-  category: 'rice' | 'pasta' | 'proteins' | 'drinks' | 'combos';
+  category: 'rice' | 'pasta' | 'proteins' | 'drinks' | 'soups' | 'swallow' | 'snacks' | 'combos';
   image: string; // placeholder emoji for now
   emoji: string;
   tag?: string; // "BEST SELLER", "FAN FAVE", "SPICY 🌶️", "SIGNATURE"
