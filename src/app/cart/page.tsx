@@ -2,17 +2,23 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { ChevronLeft, MapPin } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
+import { useAuth } from '@/context/AuthContext';
 import { CartItemRow } from '@/components/cart/CartItemRow';
 import { CartSummary } from '@/components/cart/CartSummary';
 import { Input } from '@/components/ui/Input';
+import { AuthGateModal } from '@/components/ui/AuthGateModal';
 
 export default function CartPage() {
   const { items, clearCart, cartCount } = useCart();
+  const { isLoggedIn } = useAuth();
+  const router = useRouter();
   const [mounted, setMounted] = useState(false);
   const [isDelivery, setIsDelivery] = useState(true);
   const [note, setNote] = useState('');
+  const [showAuthGate, setShowAuthGate] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -140,15 +146,23 @@ export default function CartPage() {
 
       {/* 7. Checkout CTA */}
       <div className="px-5 pt-4 pb-2">
-        <Link 
-          href={`/checkout?mode=${isDelivery ? 'delivery' : 'pickup'}`}
+        <button
+          onClick={() => {
+            if (!isLoggedIn) {
+              setShowAuthGate(true);
+            } else {
+              router.push(`/checkout?mode=${isDelivery ? 'delivery' : 'pickup'}`);
+            }
+          }}
           className="w-full bg-brand-red hover:bg-brand-red-hover h-14 rounded-md flex items-center justify-center transition-all active:scale-[0.98]"
         >
           <span className="font-body font-bold text-[15px] text-white uppercase tracking-wide">
             PROCEED TO CHECKOUT
           </span>
-        </Link>
+        </button>
       </div>
+
+      {showAuthGate && <AuthGateModal onClose={() => setShowAuthGate(false)} />}
 
         {/* 8. Add More Link */}
         <div className="text-center py-3 pb-8">

@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { ChevronLeft, MapPin, Check, ChevronDown } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
+import { useAuth } from '@/context/AuthContext';
 import { Input } from '@/components/ui/Input';
 import { formatPrice } from '@/lib/utils';
 
@@ -14,6 +15,7 @@ export default function CheckoutPage() {
   const isPickup = searchParams.get('mode') === 'pickup';
   
   const { items, cartTotal, deliveryFee, clearCart, cartCount } = useCart();
+  const { isLoggedIn } = useAuth();
   const [mounted, setMounted] = useState(false);
   const [isSummaryExpanded, setIsSummaryExpanded] = useState(false);
   const [isPlacingOrder, setIsPlacingOrder] = useState(false);
@@ -59,6 +61,12 @@ export default function CheckoutPage() {
   };
 
   if (!mounted) return null;
+
+  // Redirect unauthenticated users
+  if (!isLoggedIn) {
+    router.replace('/auth');
+    return null;
+  }
 
   // Protect against empty cart checkout
   if (items.length === 0 && !isPlacingOrder) {

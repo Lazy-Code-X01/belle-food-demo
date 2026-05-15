@@ -7,10 +7,12 @@ import { X, Check, Phone, Share2, ChevronDown } from 'lucide-react';
 import { OrderStatus, StatusStepper } from '@/components/order/StatusStepper';
 import { formatPrice } from '@/lib/utils';
 import { useToast } from '@/components/ui/Toast';
+import { useAuth } from '@/context/AuthContext';
 
 export default function OrderTrackingPage({ params }: { params: { id: string } }) {
   const router = useRouter();
   const { showToast } = useToast();
+  const { isLoggedIn } = useAuth();
   const [mounted, setMounted] = useState(false);
   
   // Order State
@@ -81,6 +83,11 @@ export default function OrderTrackingPage({ params }: { params: { id: string } }
   };
 
   if (!mounted) return null;
+
+  if (!isLoggedIn) {
+    router.replace('/auth');
+    return null;
+  }
 
   if (!order) {
     return (
