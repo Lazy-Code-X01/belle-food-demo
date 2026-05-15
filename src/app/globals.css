@@ -74,23 +74,54 @@ body {
     will-change: transform, opacity;
   }
 
-  /* Steam / cooking simulation */
+  /* Steam / cooking simulation — S-curve sway with organic expansion */
   @keyframes steam-l {
-    0%   { transform: translateY(0)      translateX(0)     scaleX(1);   opacity: 0;    }
-    10%  { opacity: 1; }
-    45%  { transform: translateY(-72px)  translateX(-15px) scaleX(2.0); opacity: 0.45; }
-    80%  { opacity: 0.08; }
-    100% { transform: translateY(-155px) translateX(7px)   scaleX(2.8); opacity: 0;    }
+    0%   { transform: translateY(0)      translateX(0)     scaleX(1)    scaleY(1);    opacity: 0;    }
+    8%   { opacity: 0.95; }
+    25%  { transform: translateY(-34px)  translateX(-11px) scaleX(1.45) scaleY(1.08); opacity: 0.75; }
+    45%  { transform: translateY(-78px)  translateX(9px)   scaleX(1.95) scaleY(1.14); opacity: 0.48; }
+    65%  { transform: translateY(-126px) translateX(-14px) scaleX(2.4)  scaleY(1.07); opacity: 0.2;  }
+    85%  { transform: translateY(-170px) translateX(7px)   scaleX(2.8)  scaleY(1.01); opacity: 0.06; }
+    100% { transform: translateY(-215px) translateX(-4px)  scaleX(3.1)  scaleY(0.93); opacity: 0;    }
   }
   @keyframes steam-r {
-    0%   { transform: translateY(0)      translateX(0)     scaleX(1);   opacity: 0;    }
-    10%  { opacity: 1; }
-    45%  { transform: translateY(-72px)  translateX(15px)  scaleX(2.0); opacity: 0.45; }
-    80%  { opacity: 0.08; }
-    100% { transform: translateY(-155px) translateX(-7px)  scaleX(2.8); opacity: 0;    }
+    0%   { transform: translateY(0)      translateX(0)     scaleX(1)    scaleY(1);    opacity: 0;    }
+    8%   { opacity: 0.95; }
+    25%  { transform: translateY(-34px)  translateX(11px)  scaleX(1.45) scaleY(1.08); opacity: 0.75; }
+    45%  { transform: translateY(-78px)  translateX(-9px)  scaleX(1.95) scaleY(1.14); opacity: 0.48; }
+    65%  { transform: translateY(-126px) translateX(14px)  scaleX(2.4)  scaleY(1.07); opacity: 0.2;  }
+    85%  { transform: translateY(-170px) translateX(-7px)  scaleX(2.8)  scaleY(1.01); opacity: 0.06; }
+    100% { transform: translateY(-215px) translateX(4px)   scaleX(3.1)  scaleY(0.93); opacity: 0;    }
   }
-  .steam-l { animation: steam-l ease-out infinite; will-change: transform, opacity; }
-  .steam-r { animation: steam-r ease-out infinite; will-change: transform, opacity; }
+  .steam-l { animation: steam-l cubic-bezier(0.4,0,0.2,1) infinite; will-change: transform, opacity; }
+  .steam-r { animation: steam-r cubic-bezier(0.4,0,0.2,1) infinite; will-change: transform, opacity; }
+
+  /* Wide background wisps — slower, deeper S-curve */
+  @keyframes steam-slow-l {
+    0%   { transform: translateY(0)      translateX(0)     scaleX(1)   scaleY(1);    opacity: 0;   }
+    7%   { opacity: 0.55; }
+    28%  { transform: translateY(-46px)  translateX(-18px) scaleX(1.55) scaleY(1.1);  opacity: 0.38; }
+    52%  { transform: translateY(-102px) translateX(13px)  scaleX(2.15) scaleY(1.2);  opacity: 0.18; }
+    78%  { transform: translateY(-165px) translateX(-11px) scaleX(2.75) scaleY(1.06); opacity: 0.05; }
+    100% { transform: translateY(-238px) translateX(7px)   scaleX(3.3)  scaleY(0.88); opacity: 0;   }
+  }
+  @keyframes steam-slow-r {
+    0%   { transform: translateY(0)      translateX(0)     scaleX(1)   scaleY(1);    opacity: 0;   }
+    7%   { opacity: 0.55; }
+    28%  { transform: translateY(-46px)  translateX(18px)  scaleX(1.55) scaleY(1.1);  opacity: 0.38; }
+    52%  { transform: translateY(-102px) translateX(-13px) scaleX(2.15) scaleY(1.2);  opacity: 0.18; }
+    78%  { transform: translateY(-165px) translateX(11px)  scaleX(2.75) scaleY(1.06); opacity: 0.05; }
+    100% { transform: translateY(-238px) translateX(-7px)  scaleX(3.3)  scaleY(0.88); opacity: 0;   }
+  }
+  .steam-slow-l { animation: steam-slow-l ease-in-out infinite; will-change: transform, opacity; }
+  .steam-slow-r { animation: steam-slow-r ease-in-out infinite; will-change: transform, opacity; }
+
+  /* Ember glow pulse */
+  @keyframes ember-pulse {
+    0%, 100% { opacity: 0.8; }
+    50%       { opacity: 1.0; }
+  }
+  .ember-glow { animation: ember-pulse 3.5s ease-in-out infinite; }
 
   @keyframes marquee {
     0%   { transform: translateX(0); }

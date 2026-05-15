@@ -4,11 +4,12 @@ import React, { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { MapPin, ArrowRight, Truck, UtensilsCrossed, BadgeCheck, Star, ChevronLeft, ChevronRight, Play, ShoppingBag, Clock, RotateCcw } from 'lucide-react';
+import { MapPin, ArrowRight, Truck, UtensilsCrossed, BadgeCheck, Star, ChevronLeft, ChevronRight, Play, ShoppingBag, Clock, RotateCcw, Flame, Users, Zap } from 'lucide-react';
 import { FoodCard } from '@/components/menu/FoodCard';
 import { menuItems, categories } from '@/data/menu';
 import { ImageSkeleton } from '@/components/ui/ImageSkeleton';
 import { useAuth } from '@/context/AuthContext';
+import { useTheme } from 'next-themes';
 
 const categoryImages: Record<string, string> = {
   rice:     'https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=400&h=250&fit=crop&auto=format&q=80',
@@ -63,6 +64,8 @@ export default function Home() {
   }, []);
 
   const { isLoggedIn } = useAuth();
+  const { resolvedTheme } = useTheme();
+  const isLight = resolvedTheme === 'light';
 
   const featuredDishes = menuItems.filter(item =>
     ['jollof-rice', 'spaghetti-bolognese', 'seafood-pasta', 'asun', 'grilled-chicken', 'meat-pie', 'egusi-soup', 'chapman'].includes(item.id)
@@ -204,46 +207,62 @@ export default function Home() {
         </div>
         {/* Steam / cooking simulation */}
         <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden" aria-hidden="true">
-          {/* Ember warmth glow rising from the bottom */}
-          <div className="absolute bottom-0 left-0 right-0 h-56"
-            style={{ background: 'linear-gradient(to top, rgba(180,45,10,0.22), rgba(200,80,20,0.07), transparent)' }} />
+          {/* Ember warmth glow — breathing pulse */}
+          <div className="ember-glow absolute bottom-0 left-0 right-0 h-56"
+            style={{ background: isLight
+              ? 'linear-gradient(to top, rgba(140,35,5,0.32), rgba(180,65,15,0.12), rgba(200,90,20,0.03), transparent)'
+              : 'linear-gradient(to top, rgba(180,45,10,0.26), rgba(210,85,20,0.1), rgba(230,120,30,0.02), transparent)'
+            }} />
 
           {[
-            // thin + fast (foreground detail)
-            { left: '6%',  delay: '0s',   dur: '3.8s', w: 5,  blur: 4,  h: 80,  warm: true,  dir: 'l' },
-            { left: '17%', delay: '1.9s', dur: '4.3s', w: 4,  blur: 3,  h: 70,  warm: false, dir: 'r' },
-            { left: '30%', delay: '0.6s', dur: '3.6s', w: 5,  blur: 4,  h: 75,  warm: true,  dir: 'r' },
-            { left: '46%', delay: '2.4s', dur: '4.0s', w: 4,  blur: 3,  h: 65,  warm: false, dir: 'l' },
-            { left: '61%', delay: '1.1s', dur: '3.9s', w: 5,  blur: 4,  h: 80,  warm: true,  dir: 'r' },
-            { left: '76%', delay: '3.3s', dur: '4.4s', w: 4,  blur: 3,  h: 70,  warm: false, dir: 'l' },
-            { left: '89%', delay: '0.4s', dur: '3.7s', w: 5,  blur: 4,  h: 75,  warm: true,  dir: 'r' },
-            // medium (mid-layer)
-            { left: '11%', delay: '0.9s', dur: '6.2s', w: 11, blur: 8,  h: 115, warm: true,  dir: 'r' },
-            { left: '35%', delay: '3.1s', dur: '7.0s', w: 12, blur: 9,  h: 125, warm: false, dir: 'l' },
-            { left: '54%', delay: '1.5s', dur: '6.6s', w: 10, blur: 8,  h: 108, warm: true,  dir: 'r' },
-            { left: '80%', delay: '2.7s', dur: '6.4s', w: 11, blur: 7,  h: 118, warm: false, dir: 'l' },
-            // wide + slow (background depth)
-            { left: '22%', delay: '0s',   dur: '9.5s', w: 22, blur: 17, h: 165, warm: false, dir: 'r' },
-            { left: '48%', delay: '5.0s', dur: '10s',  w: 26, blur: 20, h: 185, warm: true,  dir: 'l' },
-            { left: '70%', delay: '2.2s', dur: '8.8s', w: 20, blur: 15, h: 158, warm: false, dir: 'r' },
-          ].map((wisp, i) => (
-            <div
-              key={i}
-              className={`absolute bottom-0 rounded-full ${wisp.dir === 'l' ? 'steam-l' : 'steam-r'}`}
-              style={{
-                left: wisp.left,
-                width: wisp.w,
-                height: wisp.h,
-                background: wisp.warm
-                  ? 'linear-gradient(to top, rgba(255,105,25,0.55), rgba(255,168,55,0.18), transparent)'
-                  : 'linear-gradient(to top, rgba(210,215,228,0.32), rgba(255,255,255,0.08), transparent)',
-                filter: `blur(${wisp.blur}px)`,
-                animationDelay: wisp.delay,
-                animationDuration: wisp.dur,
-              }}
-            />
-          ))}
+            // thin + fast (foreground tendrils)
+            { left: '6%',  delay: '0s',   dur: '3.8s', w: 4,  blur: 3,  h: 80,  warm: true,  slow: false, dir: 'l' },
+            { left: '17%', delay: '1.9s', dur: '4.3s', w: 3,  blur: 2,  h: 70,  warm: false, slow: false, dir: 'r' },
+            { left: '30%', delay: '0.6s', dur: '3.6s', w: 4,  blur: 3,  h: 75,  warm: true,  slow: false, dir: 'r' },
+            { left: '46%', delay: '2.4s', dur: '4.0s', w: 3,  blur: 2,  h: 65,  warm: false, slow: false, dir: 'l' },
+            { left: '61%', delay: '1.1s', dur: '3.9s', w: 4,  blur: 3,  h: 80,  warm: true,  slow: false, dir: 'r' },
+            { left: '76%', delay: '3.3s', dur: '4.4s', w: 3,  blur: 2,  h: 70,  warm: false, slow: false, dir: 'l' },
+            { left: '89%', delay: '0.4s', dur: '3.7s', w: 4,  blur: 3,  h: 75,  warm: true,  slow: false, dir: 'r' },
+            // medium columns (mid-layer)
+            { left: '11%', delay: '0.9s', dur: '6.2s', w: 11, blur: 8,  h: 115, warm: true,  slow: false, dir: 'r' },
+            { left: '35%', delay: '3.1s', dur: '7.0s', w: 12, blur: 9,  h: 125, warm: false, slow: false, dir: 'l' },
+            { left: '54%', delay: '1.5s', dur: '6.6s', w: 10, blur: 8,  h: 108, warm: true,  slow: false, dir: 'r' },
+            { left: '80%', delay: '2.7s', dur: '6.4s', w: 11, blur: 7,  h: 118, warm: false, slow: false, dir: 'l' },
+            // wide clouds (background depth — use slow keyframes)
+            { left: '22%', delay: '0s',   dur: '9.5s', w: 22, blur: 17, h: 165, warm: false, slow: true,  dir: 'r' },
+            { left: '48%', delay: '5.0s', dur: '10s',  w: 26, blur: 20, h: 185, warm: true,  slow: true,  dir: 'l' },
+            { left: '70%', delay: '2.2s', dur: '8.8s', w: 20, blur: 15, h: 158, warm: false, slow: true,  dir: 'r' },
+          ].map((wisp, i) => {
+            const cls = wisp.slow
+              ? (wisp.dir === 'l' ? 'steam-slow-l' : 'steam-slow-r')
+              : (wisp.dir === 'l' ? 'steam-l'      : 'steam-r');
+            const bg = wisp.warm
+              ? isLight
+                ? 'linear-gradient(to top, rgba(155,42,6,0.85), rgba(195,75,18,0.45), rgba(220,110,30,0.1), transparent)'
+                : 'linear-gradient(to top, rgba(255,100,22,0.9), rgba(255,162,48,0.45), rgba(255,210,100,0.08), transparent)'
+              : isLight
+                ? 'linear-gradient(to top, rgba(55,55,75,0.7), rgba(85,85,105,0.35), rgba(110,110,130,0.08), transparent)'
+                : 'linear-gradient(to top, rgba(205,210,225,0.75), rgba(225,228,240,0.35), rgba(255,255,255,0.06), transparent)';
+            return (
+              <div
+                key={i}
+                className={`absolute bottom-0 rounded-full ${cls}`}
+                style={{
+                  left: wisp.left,
+                  width: wisp.w,
+                  height: wisp.h,
+                  background: bg,
+                  filter: `blur(${wisp.blur}px)`,
+                  animationDelay: wisp.delay,
+                  animationDuration: wisp.dur,
+                }}
+              />
+            );
+          })}
         </div>
+
+        {/* Silk fade — blends hero bottom into the next section */}
+        <div className="absolute bottom-0 left-0 right-0 h-36 z-20 pointer-events-none bg-gradient-to-t from-brand-black to-transparent" />
 
         <div className="relative z-10 max-w-2xl mx-auto flex flex-col items-center text-center">
           <div className="flex items-center gap-2 mb-5">
@@ -460,12 +479,12 @@ export default function Home() {
           {[...Array(2)].map((_, gi) => (
             <div key={gi} className="flex items-center gap-0">
               {[
-                { icon: <Truck size={14} />,                            text: 'Free delivery above ₦10,000' },
-                { icon: <Star size={14} className="fill-white" />,      text: '4.8★ Rated in Lagos' },
-                { icon: <BadgeCheck size={14} />,                       text: 'Fresh & hot, every order' },
-                { icon: <Truck size={14} />,                            text: 'Chevron · Lekki · Ajah' },
-                { icon: <Star size={14} className="fill-white" />,      text: '2,000+ happy customers' },
-                { icon: <BadgeCheck size={14} />,                       text: 'Order in under 2 minutes' },
+                { icon: <Truck size={14} />,                             text: 'Free delivery above ₦10,000' },
+                { icon: <Star size={14} className="fill-white" />,       text: '4.8 Rated in Lagos' },
+                { icon: <Flame size={14} />,                             text: 'Fresh & hot, every order' },
+                { icon: <MapPin size={14} />,                            text: 'Chevron · Lekki · Ajah' },
+                { icon: <Users size={14} />,                             text: '2,000+ happy customers' },
+                { icon: <Zap size={14} />,                               text: 'Order in under 2 minutes' },
               ].map(({ icon, text }, i) => (
                 <div key={i} className="flex items-center gap-8">
                   <div className="flex items-center gap-2 text-white">

@@ -22,7 +22,7 @@ export const Navbar = () => {
       <div className="h-14 px-5 max-w-6xl mx-auto flex items-center justify-between">
         {/* Left: Logo */}
         <Link href="/" className="flex items-center gap-0">
-          <Image src="/logo.png" alt="Belle Food" width={40} height={40} className="object-contain flex-shrink-0" priority />
+          <Image src={mounted && resolvedTheme === 'light' ? '/logo-red.png' : '/logo.png'} alt="Belle Food" width={40} height={40} className="object-contain flex-shrink-0" priority />
           <span className="font-display font-bold text-xl leading-none text-brand-white -ml-1 translate-y-[6px]">Belle<span className="text-brand-red">Food</span></span>
         </Link>
 

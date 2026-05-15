@@ -1,9 +1,16 @@
-import React from 'react';
+"use client";
+
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { MapPin, Clock, Phone, Mail } from 'lucide-react';
+import { useTheme } from 'next-themes';
 
 export const Footer = () => {
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => { setMounted(true); }, []);
+
   return (
     <footer className="bg-brand-surface border-t border-brand-border w-full">
 
@@ -13,7 +20,7 @@ export const Footer = () => {
         {/* Col 1: Brand */}
         <div className="col-span-2 md:col-span-1 flex flex-col gap-4">
           <Link href="/" className="flex items-center gap-0">
-            <Image src="/logo.png" alt="Belle Food" width={38} height={38} className="object-contain flex-shrink-0" />
+            <Image src={mounted && resolvedTheme === 'light' ? '/logo-red.png' : '/logo.png'} alt="Belle Food" width={38} height={38} className="object-contain flex-shrink-0" />
             <span className="font-display font-bold text-xl leading-none text-brand-white -ml-1 translate-y-[6px]">Belle<span className="text-brand-red">Food</span></span>
           </Link>
           <p className="font-body text-sm text-brand-muted leading-relaxed max-w-[200px]">

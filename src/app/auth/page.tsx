@@ -194,7 +194,7 @@ function AuthPageInner() {
             {/* Sign up only fields */}
             {mode === 'signup' && (
               <>
-                <div className="flex gap-3">
+                <div className="flex flex-col sm:flex-row gap-3">
                   <div className="flex-1 flex flex-col gap-1.5">
                     <label className="font-body text-[11px] text-brand-muted uppercase tracking-widest">First Name <span className="text-brand-red">*</span></label>
                     <div className="flex items-center gap-2 bg-brand-surface border border-brand-border rounded-sm px-3 focus-within:border-brand-red transition-colors">

@@ -8,6 +8,8 @@ import { LayoutDashboard, UtensilsCrossed, Package, MapPin, User, LogOut, Shoppi
 import { useAuth } from '@/context/AuthContext';
 import { useCart } from '@/context/CartContext';
 import { formatPrice } from '@/lib/utils';
+import { useTheme } from 'next-themes';
+import { useEffect, useState } from 'react';
 
 const navItems = [
   { label: 'Home',            href: '/',                  icon: LayoutDashboard },
@@ -29,6 +31,9 @@ export const Sidebar = () => {
   const pathname  = usePathname();
   const { user, logout } = useAuth();
   const { items, cartTotal, cartCount } = useCart();
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => { setMounted(true); }, []);
 
   const initials = user
     ? `${user.firstName[0]}${user.lastName[0]}`.toUpperCase()
@@ -43,7 +48,7 @@ export const Sidebar = () => {
       {/* Logo */}
       <div className="flex items-center h-16 px-6 border-b border-brand-border flex-shrink-0">
         <Link href="/" className="flex items-center gap-0">
-          <Image src="/logo.png" alt="Belle Food" width={38} height={38} className="object-contain flex-shrink-0" priority />
+          <Image src={mounted && resolvedTheme === 'light' ? '/logo-red.png' : '/logo.png'} alt="Belle Food" width={38} height={38} className="object-contain flex-shrink-0" priority />
           <span className="font-display font-bold text-xl leading-none text-brand-white -ml-1 translate-y-[6px]">Belle<span className="text-brand-red">Food</span></span>
         </Link>
       </div>
