@@ -3,25 +3,88 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: 250, 250, 250;
+  --foreground: 10, 10, 10;
+  
+  --brand-black: 250, 250, 250;
+  --brand-surface: 245, 245, 245;
+  --brand-card: 255, 255, 255;
+  --brand-red: 192, 57, 43;
+  --brand-red-hover: 231, 76, 60;
+  --brand-red-dark: 139, 26, 26;
+  --brand-gold: 212, 160, 80;
+  --brand-white: 10, 10, 10;
+  --brand-muted: 102, 102, 102;
+  --brand-border: 229, 229, 229;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.dark, html[data-theme="dark"] {
+  --background: 10, 10, 10;
+  --foreground: 250, 250, 250;
+  
+  --brand-black: 10, 10, 10;
+  --brand-surface: 26, 26, 26;
+  --brand-card: 34, 34, 34;
+  --brand-red: 192, 57, 43;
+  --brand-red-hover: 231, 76, 60;
+  --brand-red-dark: 139, 26, 26;
+  --brand-gold: 212, 160, 80;
+  --brand-white: 250, 250, 250;
+  --brand-muted: 119, 119, 119;
+  --brand-border: 42, 42, 42;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: rgba(var(--background), 1);
+  color: rgba(var(--foreground), 1);
 }
 
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .page-enter {
+    animation: fadeIn 0.3s ease-out forwards;
+  }
+
+  @keyframes ping-slow {
+    0% { transform: scale(1); opacity: 0.5; }
+    100% { transform: scale(1.8); opacity: 0; }
+  }
+
+  @keyframes float-up {
+    0%   { transform: translateY(0px) rotate(0deg) scale(1);   opacity: 0; }
+    10%  { opacity: 1; }
+    90%  { opacity: 0.6; }
+    100% { transform: translateY(-520px) rotate(25deg) scale(1.15); opacity: 0; }
+  }
+
+  .food-float {
+    animation: float-up linear infinite;
+    will-change: transform, opacity;
+  }
+
+  @keyframes marquee {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .marquee-track {
+    animation: marquee 18s linear infinite;
+    will-change: transform;
+  }
+
+  .marquee-track:hover {
+    animation-play-state: paused;
   }
 }
