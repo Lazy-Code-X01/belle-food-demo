@@ -291,7 +291,7 @@ export default function Home() {
           </p>
           <div className="flex gap-0 mt-10 pt-8 border-t border-brand-border w-full justify-center">
             <div className="flex-1"><p className="font-display font-bold text-2xl text-brand-red">2k+</p><p className="font-body text-[10px] text-brand-muted uppercase tracking-widest mt-1">Happy Customers</p></div>
-            <div className="flex-1"><p className="font-display font-bold text-2xl text-brand-red">4.8★</p><p className="font-body text-[10px] text-brand-muted uppercase tracking-widest mt-1">Average Rating</p></div>
+            <div className="flex-1"><p className="font-display font-bold text-2xl text-brand-red flex items-center justify-center gap-1">4.8<Star size={16} className="fill-brand-red text-brand-red mb-0.5" /></p><p className="font-body text-[10px] text-brand-muted uppercase tracking-widest mt-1">Average Rating</p></div>
             <div className="flex-1"><p className="font-display font-bold text-2xl text-brand-red">35m</p><p className="font-body text-[10px] text-brand-muted uppercase tracking-widest mt-1">Avg. Delivery</p></div>
           </div>
         </div>

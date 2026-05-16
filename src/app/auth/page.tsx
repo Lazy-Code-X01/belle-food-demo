@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { X, Mail, Lock, User, Eye, EyeOff, Phone, Gift, ChevronDown } from 'lucide-react';
+import { X, Mail, Lock, User, Eye, EyeOff, Phone, Gift, ChevronDown, Star } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { useSearchParams } from 'next/navigation';
 
@@ -119,7 +119,7 @@ function AuthPageInner() {
               <p className="font-body text-[10px] text-white/50 uppercase tracking-widest mt-0.5">Customers</p>
             </div>
             <div>
-              <p className="font-display font-bold text-3xl text-white">4.8★</p>
+              <p className="font-display font-bold text-3xl text-white flex items-center gap-1">4.8<Star size={18} className="fill-white text-white mb-0.5" /></p>
               <p className="font-body text-[10px] text-white/50 uppercase tracking-widest mt-0.5">Rating</p>
             </div>
             <div>
