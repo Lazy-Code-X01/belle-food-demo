@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     description: "King Mitchy's Belle Food - Lagos's favourite restaurant, now online.",
     images: [
       {
-        url: "https://res.cloudinary.com/dioiyb833/image/upload/v1778890148/cfafbb88-c664-4512-afb9-eaf7fe09d7bb.png",
+        url: "https://res.cloudinary.com/dioiyb833/image/upload/f_auto,q_auto:good,w_1200,h_630,c_fill/v1778890148/cfafbb88-c664-4512-afb9-eaf7fe09d7bb.png",
         width: 1200,
         height: 630,
         alt: "Belle Food - Premium Food Delivery",
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Belle Food - Premium Food Delivery",
     description: "King Mitchy's Belle Food - Lagos's favourite restaurant, now online.",
-    images: ["https://res.cloudinary.com/dioiyb833/image/upload/v1778890148/cfafbb88-c664-4512-afb9-eaf7fe09d7bb.png"],
+    images: ["https://res.cloudinary.com/dioiyb833/image/upload/f_auto,q_auto:good,w_1200,h_630,c_fill/v1778890148/cfafbb88-c664-4512-afb9-eaf7fe09d7bb.png"],
   },
 };
 
